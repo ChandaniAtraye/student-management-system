@@ -10,6 +10,7 @@ const Sidebar = () =>{
         <Link className="text-white d-block mb-2" to="/">Dashboard</Link>
         <Link className="text-white d-block mb-2" to="/students">Students</Link>
         <Link className="text-white d-block mb-2" to="/courses">Courses</Link>
+        <Link className="text-white d-block mb-2" to="/attendance">Attendance</Link>
        
         {/* <Layout/> */}
     </div>

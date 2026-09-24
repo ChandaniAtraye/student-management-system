@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar bg-white navbar-light px-3">
-      <h3 className="navbar-brand">Student Management</h3>
+      <h3 className="navbar-brand ">Student Management</h3>
 
       <button onClick={handleLogout} className="btn btn-danger">
         Logout

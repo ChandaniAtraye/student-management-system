@@ -1,4 +1,4 @@
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getCourses } from "../api/courseApi";
 import { addStudent, deleteStudent, getStudents, updateStudent } from "../api/studentApi";
 import Layout from "../components/Layout";
@@ -21,45 +21,46 @@ const Students = () => {
         loadCourses();
     }, []);
 
- const loadStudents = async () => {
-  try {
-    const res = await getStudents();
+    const loadStudents = async () => {
+        try {
+            const res = await getStudents();
 
-    const studentsArray =
-      res?.data?.students ||   // case 1
-      res?.data?.data ||       // case 2
-      res?.data ||             // case 3
-      [];
+            const studentsArray =
+                res?.data?.students ||   // case 1
+                res?.data?.data ||       // case 2
+                res?.data ||             // case 3
+                [];
 
-    setStudents(Array.isArray(studentsArray) ? studentsArray : []);
-  } catch (error) {
-    console.error(error);
-    setStudents([]); // fallback
-  }
-};
+            setStudents(Array.isArray(studentsArray) ? studentsArray : []);
+        } catch (error) {
+            console.error(error);
+            setStudents([]); // fallback
+        }
+    };
 
     const loadCourses = async () => {
         const res = await getCourses();
         setCourses(res.data);
     };
 
-    const handleSubmit = async() => {
-        if(!name || !email || !phone || !course){
-            alert("All fields are required")
+    const handleSubmit = async () => {
+        if (!name || !email || !phone || !course) {
+            alert("All fields are required");
+            return;
         }
-          const studentData = {
-        name,
-        email,
-        phone,
-        course
-    };
-    if(editId){
-        await updateStudent(editId,studentData);
-    }else{
-        await addStudent(studentData);
-    }
-    resetForm();
-    loadStudents();
+        const studentData = {
+            name,
+            email,
+            phone,
+            course
+        };
+        if (editId) {
+            await updateStudent(editId, studentData);
+        } else {
+            await addStudent(studentData);
+        }
+        resetForm();
+        loadStudents();
 
     };
 
@@ -67,27 +68,28 @@ const Students = () => {
         setEditId(student._id);
         setName(student.name);
         setEmail(student.email);
-          setPhone(student.phone);
-            setCourse(student.course?._id || "");
+        setPhone(student.phone);
+        setCourse(student.course?._id || "");
 
     };
-    const handleDelete = async (id) =>{
-        if(window.confirm("Are you sure want to delete this student")){
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure want to delete this student")) {
             await deleteStudent(id);
             loadStudents();
         }
     };
-    const resetForm =() =>{
-          setEditId(null);
+    const resetForm = () => {
+        setEditId(null);
         setName("");
         setEmail("");
-          setPhone("");
-            setCourse("");
+        setPhone("");
+        setCourse("");
     }
-  
+
     return (
-        <div className="container">
-            <Layout>
+        <Layout>
+            <div className="container ">
+
                 <h3 className="mb-3">Students</h3>
                 <div className="card p-3 mb-4">
                     <h5 className="mb-3">{editId ? "Edit Student" : "Add Student"}</h5>
@@ -137,7 +139,8 @@ const Students = () => {
                 </div>
 
 
-                <table className="table table-bordered ">
+               <div className="overflow-auto" style={{ height: "50vh" }}>
+                 <table className="table table-bordered ">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -147,40 +150,42 @@ const Students = () => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-  {studentss.length === 0 ? (
-    <tr>
-      <td colSpan="5" className="text-center">No Student Found</td>
-    </tr>
-  ) : (
-    studentss.map((s) => (
-      <tr key={s._id}>
-        <td>{s.name}</td>
-        <td>{s.email}</td>
-        <td>{s.phone}</td>
-        <td>{s.course?.courseName || "-"}</td>
-        <td>
-          <button
-            className="btn btn-warning me-2"
-            onClick={() => handleEdit(s)}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => handleDelete(s._id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+                    <tbody >
+                        {studentss.length === 0 ? (
+                            <tr>
+                                <td colSpan="5" className="text-center">No Student Found</td>
+                            </tr>
+                        ) : (
+                            studentss.map((s) => (
+                                <tr key={s._id}>
+                                    <td>{s.name}</td>
+                                    <td>{s.email}</td>
+                                    <td>{s.phone}</td>
+                                    <td>{s.course?.courseName || "-"}</td>
+                                    <td>
+                                        <button
+                                            className="btn btn-warning me-2"
+                                            onClick={() => handleEdit(s)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-danger"
+                                            onClick={() => handleDelete(s._id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
 
                 </table>
-            </Layout>
-        </div>
+               </div>
+
+            </div>
+        </Layout>
     );
 };
 

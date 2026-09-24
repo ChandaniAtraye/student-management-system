@@ -40,32 +40,37 @@ const Courses = () => {
 
   return (
     <Layout>
-      <h3>Courses</h3>
+      <div className="container h-100 d-flex flex-column">
+        <h3>Courses</h3>
 
-      {/* 🔴 Error Message */}
-      {error && <div className="alert alert-danger">{error}</div>}
+        {/* 🔴 Error Message */}
+        {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* 🟢 Success Message */}
-      {success && <div className="alert alert-success">{success}</div>}
+        {/* 🟢 Success Message */}
+        {success && <div className="alert alert-success">{success}</div>}
 
-      <input
-        className="form-control mb-3"
-        placeholder="Enter Course Name"
-        value={courseName}
-        onChange={(e) => setCourseName(e.target.value)}
-      />
+        <input
+          className="form-control mb-3"
+          placeholder="Enter Course Name"
+          value={courseName}
+          onChange={(e) => setCourseName(e.target.value)}
+        />
 
-      <button className="btn btn-success mb-3" onClick={submit}>
-        Add
-      </button>
+        <button className="btn btn-success mb-3" onClick={submit}>
+          Add
+        </button>
 
-      <ul className="list-group">
-        {courses.map((c) => (
-          <li key={c._id} className="list-group-item">
-            {c.courseName}
-          </li>
-        ))}
-      </ul>
+        <div className="flex-grow-1 overflow-auto">
+          <ul className="list-group">
+            {courses.map((c) => (
+              <li key={c._id} className="list-group-item">
+                {c.courseName}
+              </li>
+              
+            ))}
+          </ul>
+        </div>
+      </div>
     </Layout>
   );
 };

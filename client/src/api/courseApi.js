@@ -7,7 +7,7 @@ export const getCourses = ()=>
     axiosInstance.get("/courses");
 
 export const updateCourse = (id,data)=>
-    axiosInstance.post(`courses/${id}`,data);
+    axiosInstance.put(`courses/${id}`,data);
 
 export const deleteCourse = (id)=>
-    axiosInstance.post(`courses/${id}`);
+    axiosInstance.delete(`courses/${id}`);

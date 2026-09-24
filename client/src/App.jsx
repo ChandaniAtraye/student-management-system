@@ -6,19 +6,21 @@ import AuthProvider from "./context/AuthContext";
 import Register from "./pages/Register";
 import Courses from "./pages/Courses";
 import Students from "./pages/Students";
+import Attendance from "./pages/Attendance";
 
 const App = () => (
   <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-       
+        <Route path="/register" element={<Register />} />
+
 
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/courses" element={<PrivateRoute><Courses /></PrivateRoute>} />
- <Route path="/students" element={<PrivateRoute><Students /></PrivateRoute>} />
-     
+        <Route path="/students" element={<PrivateRoute><Students /></PrivateRoute>} />
+        <Route path="/attendance" element={<PrivateRoute><Attendance /></PrivateRoute>} />
+
       </Routes>
     </BrowserRouter>
   </AuthProvider>
