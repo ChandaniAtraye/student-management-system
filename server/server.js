@@ -20,6 +20,7 @@ app.use(express.json());
 app.use("/api/auth",require("./routes/authRoutes"));
 app.use('/api/courses',require('./routes/courseRoutes'));
 app.use("/api/students",require("./routes/studentRoutes"));
+app.use("/api/attendance",require("./routes/attendanceRoutes"));
 
 app.get("/",(req,res)=>{
     res.send("Student API is running");
